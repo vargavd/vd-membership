@@ -220,13 +220,13 @@ Use the built-in WordPress sanitazion and escaping functions, for example the `s
 *Note*: every step includes unit tests where relevant.
 
 ```
-1. Plugin bootstrap and autoloading (vd-membership.php)
+1. Plugin bootstrap and autoloading (vd-membership.php) ✅
         ↓
-2. Application (Application.php)
+2. Application (Application.php) ✅
         ↓
-3. Configuration / Settings (SettingsRepository.php)
+3. Configuration / Settings (SettingsRepository.php) ✅
         ↓
-4. ExternalDatabaseConnection (ExternalDatabaseConnection.php)
+4. ExternalDatabaseConnection (ExternalDatabaseConnection.php) ✅
         ↓
 5. Member domain object
         ↓
