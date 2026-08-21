@@ -1,0 +1,17 @@
+{
+  "name": "vargavd/vd-membership",
+  "description": "WordPress membership management plugin",
+  "require-dev": {
+    "phpunit/phpunit": "^10.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "VDMembership\\": "./"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "VDMembership\\Tests\\": "tests/"
+    }
+  }
+}

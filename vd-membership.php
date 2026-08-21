@@ -4,7 +4,7 @@ Plugin Name: VD Membership
 Plugin URI: https://github.com/vargavd/membership
 Description: Manages members for termeszetvedok.hu
 Version: 0.1
-Requires PHP: 8.0
+Requires PHP: 8.1
 Author: vargavd
 Author URI: https://github.com/vargavd
 License: GPLv2 or later
@@ -33,6 +33,7 @@ require_once(plugin_dir_path(__FILE__) . 'inc/helper.php');
 require_once(plugin_dir_path(__FILE__) . 'inc/disable-stuff.php');
 require_once(plugin_dir_path(__FILE__) . 'inc/enqueue.php');
 
+
 // redirect any page to login page
 add_action('template_redirect', function () {
   if (!is_page('login')) {
@@ -40,3 +41,21 @@ add_action('template_redirect', function () {
     exit;
   }
 });
+
+// PSR-4 autoloader for the VDMembership namespace rooted at this directory
+spl_autoload_register(function (string $class): void {
+    $prefix = 'VDMembership\\';
+
+    if (strncmp($prefix, $class, strlen($prefix)) !== 0) {
+        return;
+    }
+
+    $relative_class = substr($class, strlen($prefix));
+    $file = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $relative_class) . '.php';
+
+    if (file_exists($file)) {
+        require_once $file;
+    }
+});
+
+\VDMembership\Application\Application::bootstrap(__FILE__);

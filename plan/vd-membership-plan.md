@@ -222,21 +222,23 @@ Use the built-in WordPress sanitazion and escaping functions, for example the `s
 ```
 1. Plugin bootstrap and autoloading (vd-membership.php)
         ↓
-2. Configuration / Settings (SettingsRepository.php)
+2. Application (Application.php)
         ↓
-3. ExternalDatabaseConnection (ExternalDatabaseConnection.php)
+3. Configuration / Settings (SettingsRepository.php)
         ↓
-4. Member domain object
+4. ExternalDatabaseConnection (ExternalDatabaseConnection.php)
         ↓
-5. MysqlMemberRepository
+5. Member domain object
         ↓
-6. MemberValidator
+6. MysqlMemberRepository
         ↓
-7. MemberService
+7. MemberValidator
         ↓
-8. Admin UI
+8. MemberService
         ↓
-9. CRUD operations
+9. Admin UI
         ↓
-10. Tests / polish
+10. CRUD operations
+        ↓
+11. Tests / polish
 ```
