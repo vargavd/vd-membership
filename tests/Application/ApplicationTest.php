@@ -15,6 +15,7 @@ class ApplicationTest extends TestCase
         $GLOBALS['_vd_test_options']             = [];
         $GLOBALS['_vd_test_mysqli_result']        = false;
         $GLOBALS['_vd_test_can_manage_options']   = true;
+        $GLOBALS['_vd_test_transients']          = [];
         unset($GLOBALS['_vd_test_mysqli_error'], $GLOBALS['_vd_test_wpdb_dbh']);
         ExternalDatabaseConnection::reset();
         Application::reset();
@@ -128,5 +129,64 @@ class ApplicationTest extends TestCase
         $output = ob_get_clean();
 
         $this->assertSame('', $output);
+    }
+
+    // ----------------------------------------------
+    // Transient-based notices
+    // ----------------------------------------------
+
+    public function test_displays_transient_success_notice(): void
+    {
+        $GLOBALS['_vd_test_transients']['vd_membership_notices'] = [
+            ['type' => 'success', 'message' => 'Mentés sikeres.'],
+        ];
+
+        ob_start();
+        Application::display_notices();
+        $output = ob_get_clean();
+
+        $this->assertStringContainsString('notice-success', $output);
+        $this->assertStringContainsString('Mentés sikeres.', $output);
+    }
+
+    public function test_displays_transient_error_notice(): void
+    {
+        $GLOBALS['_vd_test_transients']['vd_membership_notices'] = [
+            ['type' => 'error', 'message' => 'Adatbázis hiba: connection refused'],
+        ];
+
+        ob_start();
+        Application::display_notices();
+        $output = ob_get_clean();
+
+        $this->assertStringContainsString('notice-error', $output);
+        $this->assertStringContainsString('Adatbázis hiba', $output);
+    }
+
+    public function test_transient_is_deleted_after_display(): void
+    {
+        $GLOBALS['_vd_test_transients']['vd_membership_notices'] = [
+            ['type' => 'success', 'message' => 'OK'],
+        ];
+
+        ob_start();
+        Application::display_notices();
+        ob_get_clean();
+
+        $this->assertFalse(isset($GLOBALS['_vd_test_transients']['vd_membership_notices']));
+    }
+
+    public function test_transient_not_consumed_for_non_admin(): void
+    {
+        $GLOBALS['_vd_test_can_manage_options']                  = false;
+        $GLOBALS['_vd_test_transients']['vd_membership_notices'] = [
+            ['type' => 'success', 'message' => 'Should persist'],
+        ];
+
+        ob_start();
+        Application::display_notices();
+        ob_get_clean();
+
+        $this->assertNotEmpty($GLOBALS['_vd_test_transients']['vd_membership_notices']);
     }
 }

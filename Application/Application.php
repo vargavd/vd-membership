@@ -21,8 +21,11 @@ class Application
         register_activation_hook($plugin_file, [self::class, 'activate']);
         register_deactivation_hook($plugin_file, [self::class, 'deactivate']);
 
-        add_action('admin_init',   [self::class, 'test_db_connection']);
+        add_action('admin_menu',    [\VDMembership\Admin\AdminMenu::class,    'register']);
+        add_action('admin_init',    [self::class, 'test_db_connection']);
         add_action('admin_notices', [self::class, 'display_notices']);
+
+        add_action('admin_post_vd_membership_settings', [\VDMembership\Admin\SettingsPage::class, 'handle_post']);
     }
 
     public static function activate(): void
@@ -59,6 +62,15 @@ class Application
 
         $notices = []; // array of [ 'type' => 'error'|'success', 'message' => string ]
 
+        // Transient notices from POST operations (CRUD results, survive PRG redirect)
+        $transient = get_transient(\VDMembership\Application\MemberService::TRANSIENT_KEY);
+        if (is_array($transient)) {
+            delete_transient(\VDMembership\Application\MemberService::TRANSIENT_KEY);
+            foreach ($transient as $n) {
+                $notices[] = $n;
+            }
+        }
+
         if (!self::$db_credentials_given) {
             $notices[] = [
                 'type' => 'warning',
@@ -89,8 +101,6 @@ class Application
             echo '<div class="notice notice-' . $notice['type'] . ' is-dismissible"><p>'
                 . wp_kses_post($notice['message']) . '</p></div>';
         }
-
-        // Transient-based notices from POST operations will be displayed here in later steps
     }
 
     /** Resets in-request state — used in tests. */
