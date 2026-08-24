@@ -146,8 +146,7 @@ For the plugin settings, use the WordPress Options API. This will use the defaul
 
 ### 2. Members storage
 For the members, use a custom connection to an external db. The credentials for this connection should come from the first storage option. The user has to provide these in the plugin's settings dashboard page.
-Use a custom `wpdb` instance and use the `set_charset` method with the appropriate one (`latin2`).
-One thing is certain: the external table uses the `latin2_hungarian_ci` encoding.
+Use a custom `wpdb` instance.
 We also know the exact schema of the table we will use. Please map these columns in the Domain layer and use these in the UI layer appropriately.
 
 ```
@@ -237,9 +236,9 @@ Use the built-in WordPress sanitazion and escaping functions, for example the `s
 8. MemberService (MemberService.php) ✅
         ↓
 9. Admin UI (AdminMenu, template files, potential assets)
-  - 9.1 Settings admin menupoint
+  - 9.1 Settings admin menupoint ✅
         ↓
-  - 9.2 Members admin menupoint and the relevant templates
+  - 9.2 Members admin menupoint and the relevant templates ✅
         ↓
   - 9.3 Edit Member admin menupoint and the relevant templates
         ↓

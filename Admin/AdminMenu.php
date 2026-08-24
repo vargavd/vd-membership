@@ -19,9 +19,19 @@ class AdminMenu
             'VD Membership',
             'manage_options',
             self::SLUG_ROOT,
-            [SettingsPage::class, 'render'],  // updated to MembersPage in step 9.2
+            [MembersPage::class, 'render'],
             'dashicons-groups',
             30
+        );
+
+        // First submenu renames the auto-created root item to 'Tagok'
+        add_submenu_page(
+            self::SLUG_ROOT,
+            'Tagok – VD Membership',
+            'Tagok',
+            'manage_options',
+            self::SLUG_MEMBERS,
+            [MembersPage::class, 'render']
         );
 
         add_submenu_page(

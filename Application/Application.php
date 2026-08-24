@@ -25,7 +25,8 @@ class Application
         add_action('admin_init',    [self::class, 'test_db_connection']);
         add_action('admin_notices', [self::class, 'display_notices']);
 
-        add_action('admin_post_vd_membership_settings', [\VDMembership\Admin\SettingsPage::class, 'handle_post']);
+        add_action('admin_post_vd_membership_settings', [\VDMembership\Admin\SettingsPage::class,  'handle_post']);
+        add_action('admin_post_vd_membership_members',  [\VDMembership\Admin\MembersPage::class,   'handle_post']);
     }
 
     public static function activate(): void

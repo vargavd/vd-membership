@@ -29,7 +29,7 @@ vd-membership.php          Bootstrap: registers autoloader, calls Application::b
 │
 ├── Admin/                 WordPress screens + form handling
 │   ├── AdminMenu.php      ✅ Menu registration; defines all slug constants
-│   ├── MembersPage.php    (not yet implemented)
+│   ├── MembersPage.php    ✅ Renders member list + handles "delete" action
 │   ├── EditMemberPage.php (not yet implemented)
 │   ├── NewMemberPage.php  (not yet implemented)
 │   └── SettingsPage.php   ✅ Credentials form + Test Connection handler
@@ -38,7 +38,7 @@ vd-membership.php          Bootstrap: registers autoloader, calls Application::b
 ├── assets/js/admin.js     (not yet created)
 │
 └── templates/admin/       PHP view templates
-    ├── members.php         (not yet created)
+    ├── members.php         ✅ member list template
     ├── member-form.php     (not yet created) shared by new and edit pages
     └── settings.php        ✅
 ```

@@ -40,7 +40,8 @@ class ExternalDatabaseConnection
         mysqli_close($test);
 
         $db = new \wpdb($user, $pass, $name, $host);
-        $db->set_charset($db->dbh, 'latin2', 'latin2_hungarian_ci');
+        // $db->set_charset($db->dbh, 'latin2', 'latin2_hungarian_ci'); <- this did not read the accented characters correctly, so we will use the default charset instead
+        $db->set_charset($db->dbh);
 
         self::$connection = $db;
         return self::$connection;
