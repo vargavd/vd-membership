@@ -20,7 +20,7 @@ namespace {
                 $this->dbh = $GLOBALS['_vd_test_wpdb_dbh'] ?? null;
             }
 
-            public function set_charset(mixed $dbh, string $charset, string $collate = ''): void {}
+            public function set_charset(mixed $dbh, string $charset = '', string $collate = ''): void {}
 
             public int $insert_id = 0;
 

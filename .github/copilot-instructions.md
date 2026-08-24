@@ -30,7 +30,7 @@ vd-membership.php          Bootstrap: registers autoloader, calls Application::b
 ├── Admin/                 WordPress screens + form handling
 │   ├── AdminMenu.php      ✅ Menu registration; defines all slug constants
 │   ├── MembersPage.php    ✅ Renders member list + handles "delete" action
-│   ├── EditMemberPage.php (not yet implemented)
+│   ├── EditMemberPage.php ✅ Renders edit form + handles update action
 │   ├── NewMemberPage.php  (not yet implemented)
 │   └── SettingsPage.php   ✅ Credentials form + Test Connection handler
 │
@@ -39,7 +39,7 @@ vd-membership.php          Bootstrap: registers autoloader, calls Application::b
 │
 └── templates/admin/       PHP view templates
     ├── members.php         ✅ member list template
-    ├── member-form.php     (not yet created) shared by new and edit pages
+    ├── member-form.php     ✅ shared by new and edit pages
     └── settings.php        ✅
 ```
 
@@ -55,9 +55,9 @@ Steps 1–9.1 complete (see `plan/vd-membership-plan.md`):
 - ✅ `MemberService` (CRUD orchestration, catches DB errors, stores transient notices)
 - ✅ `AdminMenu` (slug constants, menu registration)
 - ✅ `SettingsPage` + `templates/admin/settings.php`
-- ⬜ `MembersPage` + `templates/admin/members.php`
-- ⬜ `EditMemberPage` + `NewMemberPage` + `templates/admin/member-form.php`
-- ⬜ Assets (`assets/css/admin.css`, `assets/js/admin.js`)
+- ✅ `MembersPage` + `templates/admin/members.php`
+- ✅ `EditMemberPage` + `templates/admin/member-form.php`
+- ⬜ `NewMemberPage`
 
 ## Key design decisions
 

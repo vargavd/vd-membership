@@ -240,7 +240,7 @@ Use the built-in WordPress sanitazion and escaping functions, for example the `s
         ↓
   - 9.2 Members admin menupoint and the relevant templates ✅
         ↓
-  - 9.3 Edit Member admin menupoint and the relevant templates
+  - 9.3 Edit Member admin menupoint and the relevant templates ✅
         ↓
   - 9.4 New Member admin menupoint
         ↓

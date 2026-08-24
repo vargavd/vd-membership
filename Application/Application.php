@@ -21,7 +21,7 @@ class Application
         register_activation_hook($plugin_file, [self::class, 'activate']);
         register_deactivation_hook($plugin_file, [self::class, 'deactivate']);
 
-        add_action('admin_menu',    [\VDMembership\Admin\AdminMenu::class,    'register']);
+        add_action('admin_menu',    [\VDMembership\Admin\AdminMenu::class,    'register'], 999);
         add_action('admin_init',    [self::class, 'test_db_connection']);
         add_action('admin_notices', [self::class, 'display_notices']);
 

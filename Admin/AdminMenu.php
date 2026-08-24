@@ -34,6 +34,17 @@ class AdminMenu
             [MembersPage::class, 'render']
         );
 
+        // Register edit page; accessed via table row links, not directly navigated to
+        $edit_hook = add_submenu_page(
+            self::SLUG_ROOT,
+            'Tag szerkesztése – VD Membership',
+            'Tag szerkesztése',
+            'manage_options',
+            self::SLUG_EDIT,
+            [EditMemberPage::class, 'render']
+        );
+        add_action('load-' . $edit_hook, [EditMemberPage::class, 'init']);
+
         add_submenu_page(
             self::SLUG_ROOT,
             'Beállítások – VD Membership',
