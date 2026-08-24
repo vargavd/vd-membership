@@ -34,6 +34,16 @@ class AdminMenu
             [MembersPage::class, 'render']
         );
 
+        $new_hook = add_submenu_page(
+            self::SLUG_ROOT,
+            'Új tag – VD Membership',
+            'Új tag',
+            'manage_options',
+            self::SLUG_NEW,
+            [NewMemberPage::class, 'render']
+        );
+        add_action('load-' . $new_hook, [NewMemberPage::class, 'init']);
+
         // Register edit page; accessed via table row links, not directly navigated to
         $edit_hook = add_submenu_page(
             self::SLUG_ROOT,
